@@ -12,9 +12,11 @@
   "description": "",
   "dependencies": {
     "@colors/colors": "^1.6.0",
+    "bcrypt": "^6.0.0",
     "colors": "^1.4.0",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
+    "express-session": "^1.18.2",
     "mysql2": "^3.15.3",
     "nodemon": "^3.1.10"
   }
