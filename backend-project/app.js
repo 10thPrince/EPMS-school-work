@@ -7,6 +7,7 @@ import employeeRoutes from './routes/employeeRoute.js'
 import departmentRoutes from './routes/departmentRoutes.js'
 import salaryRoutes from './routes/salaryRoutes.js'
 import session from "express-session";
+import cors from 'cors'
 
 dotenv.config();
 
@@ -22,6 +23,12 @@ app.get('/', (req, res) => {
     });
 })
 
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true, 
+  methods: ["GET", "POST", "PUT", "DELETE"],
+}));
+
 app.use(session({
     secret: "suppersecret",
     resave: false,
@@ -33,7 +40,7 @@ app.use(express.json());
 
 app.use('/user', authRoutes);
 app.use('/employee', employeeRoutes);
-app.use('/department', departmentRoutes);
+app.use('/department', departmentRoutes); //department
 app.use('/salary', salaryRoutes);
 
 app.listen(port, () => {
