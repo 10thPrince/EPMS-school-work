@@ -3,14 +3,14 @@ import { getDB } from "../config/db.js";
 // Add Salary
 export const addSalary = (req, res) => {
     const db = getDB();
-    const { employeeNumber, GrossSalary, TotalDeduction, NetSalary, Month } = req.body;
+    const { employee_id, base_salary, deductions, net_salary, payment_date } = req.body;
 
     const q = `
-    INSERT INTO Salary (employeeNumber, GrossSalary, TotalDeduction, NetSalary, Month)
+    INSERT INTO Salary (employee_id, base_salary, deductions, net_salary, payment_date)
     VALUES (?, ?, ?, ?, ?)
   `;
 
-    db.query(q, [employeeNumber, GrossSalary, TotalDeduction, NetSalary, Month], (err) => {
+    db.query(q, [employee_id, base_salary, deductions, net_salary, payment_date], (err) => {
         if (err) return res.status(500).json(err);
         res.json({ message: "✅ Salary added successfully" });
     });
@@ -20,10 +20,10 @@ export const addSalary = (req, res) => {
 export const getSalaries = (req, res) => {
     const db = getDB();
     const q = `
-    SELECT s.SalaryID, e.FirstName, e.LastName, e.Position, d.DepartmentName, s.NetSalary, s.Month
+    SELECT s.salary_id, e.first_name, e.last_name, e.position, d.department_name, s.net_salary, s.payment_date
     FROM Salary s
-    JOIN Employee e ON s.employeeNumber = e.employeeNumber
-    JOIN Department d ON e.DepartmentCode = d.DepartmentCode
+    JOIN Employee e ON s.employee_id = e.employee_id
+    JOIN Department d ON e.department_id = d.department_id
   `;
     db.query(q, (err, rows) => {
         if (err) return res.status(500).json(err);

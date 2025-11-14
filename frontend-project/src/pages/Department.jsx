@@ -4,10 +4,11 @@ import api from "../api";
 export default function Department() {
   const [departments, setDepartments] = useState([]);
   const [form, setForm] = useState({
-    DepartmentCode: "",
-    DepartmentName: "",
-    GrossSalary: "",
-    TotalDeduction: "",
+    department_id: "",
+    department_code: "",
+    department_name: "",
+    gross_salary: "",
+    total_deduction: "",
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -19,7 +20,7 @@ export default function Department() {
       const res = await api.get("/department/all");
       console.log(res.data)
       setDepartments(res.data);
-      
+
     } catch (err) {
       console.error("Error fetching departments:", err);
       setError("Failed to load departments");
@@ -47,10 +48,10 @@ export default function Department() {
       await api.post("/department/add", form);
       setSuccess("✅ Department added successfully!");
       setForm({
-        DepartmentCode: "",
-        DepartmentName: "",
-        GrossSalary: "",
-        TotalDeduction: "",
+        department_code: "",
+        department_name: "",
+        gross_salary: "",
+        total_deduction: "",
       });
       fetchDepartments();
     } catch (err) {
@@ -77,32 +78,32 @@ export default function Department() {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
         >
           <input
-            name="DepartmentCode"
+            name="department_code"
             placeholder="Department Code"
-            value={form.DepartmentCode}
+            value={form.department_code}
             onChange={handleChange}
             className="border p-2 rounded"
           />
           <input
-            name="DepartmentName"
+            name="department_name"
             placeholder="Department Name"
-            value={form.DepartmentName}
+            value={form.department_name}
             onChange={handleChange}
             className="border p-2 rounded"
           />
           <input
             type="number"
-            name="GrossSalary"
+            name="gross_salary"
             placeholder="Gross Salary"
-            value={form.GrossSalary}
+            value={form.gross_salary}
             onChange={handleChange}
             className="border p-2 rounded"
           />
           <input
             type="number"
-            name="TotalDeduction"
+            name="total_deduction"
             placeholder="Total Deduction"
-            value={form.TotalDeduction}
+            value={form.total_deduction}
             onChange={handleChange}
             className="border p-2 rounded"
           />
@@ -135,12 +136,12 @@ export default function Department() {
                 </tr>
               </thead>
               <tbody>
-                {departments.map((index, dep) => (
-                  <tr key={index } className="hover:bg-gray-50">
-                    <td className="p-2 border">{dep.DepartmentCode}</td>
-                    <td className="p-2 border">{dep.DepartmentName}</td>
-                    <td className="p-2 border">{dep.GrossSalary}</td>
-                    <td className="p-2 border">{dep.TotalDeduction}</td>
+                {departments.map((dep) => (
+                  <tr key={dep.department_id} className="hover:bg-gray-50">
+                    <td className="p-2 border">{dep.department_code}</td>
+                    <td className="p-2 border">{dep.department_name}</td>
+                    <td className="p-2 border">{dep.gross_salary}</td>
+                    <td className="p-2 border">{dep.total_deduction}</td>
                   </tr>
                 ))}
               </tbody>
