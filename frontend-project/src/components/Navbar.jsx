@@ -47,9 +47,7 @@ export default function Navbar() {
           <Link to="/salary" className={linkClass("/salary")}>
             Salaries
           </Link>
-          <Link to="/reports" className={linkClass("/reports")}>
-            Reports
-          </Link>
+          
         </div>
 
         {/* Logout */}

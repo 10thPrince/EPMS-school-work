@@ -9,7 +9,7 @@ export const getEmployees = async (req, res) => {
     try {
         const db = getDB();
 
-        const q = `SELECT * from employee`;
+        const q = `SELECT * from employees`;
 
         db.query(q, (err, result) => {
             if(err) return res.status(400).json({
@@ -39,19 +39,19 @@ export const createEmployee = (req, res) => {
     try {
         const db = getDB();
 
-        const { FirstName, LastName, Position, Address, Telephone, Gender, hiredDate, DepartmentCode } = req.body;
+        const { first_name, last_name, position, address, telephone, gender, hired_date, department_id } = req.body;
 
-        if(!FirstName || !LastName || !Position || !Address || !Telephone || !Gender || !hiredDate || !DepartmentCode){
+        if(!first_name || !last_name || !position || !address || !telephone || !gender || !hired_date || !department_id){
             return res.status(400).json({
                 success: false,
                 message: 'Please fill in the required Fields',
             })
         }
 
-        const q = `INSERT INTO employee (FirstName, LastName, Position, Address, Telephone, Gender, hiredDate, DepartmentCode) 
+        const q = `INSERT INTO employees (first_name, last_name, position, address, telephone, gender, hired_date, department_id) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
 
-        const values = [FirstName, LastName, Position, Address, Telephone, Gender, hiredDate, DepartmentCode];
+        const values = [first_name, last_name, position, address, telephone, gender, hired_date, department_id];
 
         db.query(q, values, (err, result) => {
             if(err){

@@ -5,7 +5,7 @@ export const addDepartment = (req, res) => {
     try {
         const db = getDB();
         const q = `
-    INSERT INTO Department (DepartmentCode, DepartmentName, GrossSalary, TotalDeduction)
+    INSERT INTO departments (department_code, department_name, gross_salary, total_deduction)
     VALUES (?, ?, ?, ?)
   `;
         const values = [
@@ -33,7 +33,7 @@ export const addDepartment = (req, res) => {
 export const getDepartments = (req, res) => {
     try {
         const db = getDB();
-        db.query("SELECT * FROM Department", (err, rows) => {
+        db.query("SELECT * FROM departments", (err, rows) => {
             if (err) return res.status(500).json(err);
             return res.json(rows);
         });

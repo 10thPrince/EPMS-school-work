@@ -5,14 +5,14 @@ import Dashboard from "./Dashboard";
 export default function Employee() {
   const [employees, setEmployees] = useState([]);
   const [form, setForm] = useState({
-    FirstName: "",
-    LastName: "",
-    Position: "",
-    Address: "",
-    Telephone: "",
-    Gender: "",
-    hiredDate: "",
-    DepartmentCode: "",
+    first_name: "",
+    last_name: "",
+    position: "",
+    address: "",
+    telephone: "",
+    gender: "",
+    hired_date: "",
+    department_id: "",
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -48,14 +48,14 @@ export default function Employee() {
       await api.post("/employee/add", form);
       setSuccess("✅ Employee added successfully!");
       setForm({
-        FirstName: "",
-        LastName: "",
-        Position: "",
-        Address: "",
-        Telephone: "",
-        Gender: "",
-        hiredDate: "",
-        DepartmentCode: "",
+        first_name: "",
+        last_name: "",
+        position: "",
+        address: "",
+        telephone: "",
+        gender: "",
+        hired_date: "",
+        department_id: "",
       });
       fetchEmployees();
     } catch (err) {
@@ -78,43 +78,43 @@ export default function Employee() {
 
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <input
-            name="FirstName"
+            name="first_name"
             placeholder="First Name"
-            value={form.FirstName}
+            value={form.first_name}
             onChange={handleChange}
             className="border p-2 rounded"
           />
           <input
-            name="LastName"
+            name="last_name"
             placeholder="Last Name"
-            value={form.LastName}
+            value={form.last_name}
             onChange={handleChange}
             className="border p-2 rounded"
           />
           <input
-            name="Position"
+            name="position"
             placeholder="Position"
-            value={form.Position}
+            value={form.position}
             onChange={handleChange}
             className="border p-2 rounded"
           />
           <input
-            name="Address"
+            name="address"
             placeholder="Address"
-            value={form.Address}
+            value={form.address}
             onChange={handleChange}
             className="border p-2 rounded"
           />
           <input
-            name="Telephone"
+            name="telephone"
             placeholder="Telephone"
-            value={form.Telephone}
+            value={form.telephone}
             onChange={handleChange}
             className="border p-2 rounded"
           />
           <select
-            name="Gender"
-            value={form.Gender}
+            name="gender"
+            value={form.gender}
             onChange={handleChange}
             className="border p-2 rounded"
           >
@@ -124,22 +124,22 @@ export default function Employee() {
           </select>
           <input
             type="date"
-            name="hiredDate"
-            value={form.hiredDate}
+            name="hired_date"
+            value={form.hired_date}
             onChange={handleChange}
             className="border p-2 rounded"
           />
           <select
-            name="DepartmentCode"
-            value={form.DepartmentCode}
+            name="department_id"
+            value={form.department_id}
             onChange={handleChange}
             className="border p-2 rounded"
           >
             <option value="">Select Department</option>
-            <option value="CW">Carwash</option>
-            <option value="ST">Stock</option>
-            <option value="MC">Mechanic</option>
-            <option value="ADMS">Admin Staff</option>
+            <option value="1">Carwash</option>
+            <option value="2">Stock</option>
+            <option value="3">Mechanic</option>
+            <option value="4">Admin Staff</option>
           </select>
 
           <button
@@ -152,7 +152,7 @@ export default function Employee() {
         </form>
       </div>
 
-      
+
       <div className="bg-white rounded-lg shadow-md p-6">
         <h2 className="text-lg font-semibold text-blue-700 mb-4">Employee List</h2>
 
@@ -174,14 +174,14 @@ export default function Employee() {
               </thead>
               <tbody>
                 {employees.map((emp) => (
-                  <tr key={emp.employeeNumber} className="hover:bg-gray-50">
-                    <td className="p-2 border">{emp.employeeNumber}</td>
-                    <td className="p-2 border">{emp.FirstName} {emp.LastName}</td>
-                    <td className="p-2 border">{emp.Position}</td>
-                    <td className="p-2 border">{emp.DepartmentCode}</td>
-                    <td className="p-2 border">{emp.Telephone}</td>
-                    <td className="p-2 border">{emp.Gender}</td>
-                    <td className="p-2 border">{emp.hiredDate?.substring(0, 10)}</td>
+                  <tr key={emp.employee_id} className="hover:bg-gray-50">
+                    <td className="p-2 border">{emp.employee_id}</td>
+                    <td className="p-2 border">{emp.first_name} {emp.last_name}</td>
+                    <td className="p-2 border">{emp.position}</td>
+                    <td className="p-2 border">{emp.department_id}</td>
+                    <td className="p-2 border">{emp.telephone}</td>
+                    <td className="p-2 border">{emp.gender}</td>
+                    <td className="p-2 border">{emp.hired_date?.substring(0, 10)}</td>
                   </tr>
                 ))}
               </tbody>
